@@ -35,28 +35,46 @@ let people = [
 
 let text = document.getElementById("input");
 let container = document.getElementById("container");
+let card = document.getElementsByClassName("card");
 
 function makeCard(){
-	let card = 
-	`<div class="container">
-		<div>Title:${people.title}</div>
-		<div>Name:${people.name}</div>
-		<div>Bio:${people.bio}</div>
-	</div>`;
-	console.log("card", card);
-	console.log("makeCard", makeCard);
-	return card;
-}
+	for (var i = 0; i < people.length; i++) {
+		container.innerHTML += `<div class="card">
+		<div>Title:${people[i].title}</div>
+		<div>Name:${people[i].name}</div>
+		<div>Bio:${people[i].bio}</div>
+		</div>`;
+	}
+	popCard();
+};
 makeCard();
 
+
 function popCard() {
-	for (var i = 0; i < people.length; i++){
-		console.log("people", people[i]);
-		var makeIt = makeCard(people[i]);
-		container.innerHTML += makeIt;
-	}
+	for (var i = 0; i < card.length; i++){
+		card[i].addEventListener("click", function(doIt) {
+			selectIt(doIt.currentTarget);
+			// deselectIt();
+		});
+	} 
 }
-popCard();
+
+function selectIt(card) {
+	card.classList.add("border");
+};
+
+// function deselectIt() {
+// 	for (var i = 0; i < card.length; i++) {
+// 		if (card[i].classList.contains("border")) {
+// 			card[i].classList.remove("border")
+// 		}
+// 	}
+// };
+
+
+
+
+
 
 
 
