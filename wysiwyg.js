@@ -42,7 +42,7 @@ function makeCard(){
 		container.innerHTML += `<div class="card">
 		<div>Title:${people[i].title}</div>
 		<div>Name:${people[i].name}</div>
-		<div>Bio:${people[i].bio}</div>
+		<div class="bio">Bio:${people[i].bio}</div>
 		</div>`;
 	}
 	popCard();
@@ -53,23 +53,37 @@ makeCard();
 function popCard() {
 	for (var i = 0; i < card.length; i++){
 		card[i].addEventListener("click", function(doIt) {
+			deselectIt();
 			selectIt(doIt.currentTarget);
-			// deselectIt();
+			// selectText(doIt.currentTarget);
 		});
 	} 
 }
 
 function selectIt(card) {
+	text.value = "";
+	text.focus();
+	console.log("card", card);
 	card.classList.add("border");
+	text.addEventListener("keyup", function(){
+		selectText(card);
+	})
 };
 
-// function deselectIt() {
-// 	for (var i = 0; i < card.length; i++) {
-// 		if (card[i].classList.contains("border")) {
-// 			card[i].classList.remove("border")
-// 		}
-// 	}
-// };
+function selectText(card){
+	console.log("card 2", card);
+	// let initialBio = card.querySelector(".bio").innerHTML;
+	if (card.classList.contains("border")) {
+		card.querySelector(".bio").innerHTML = text.value
+	}
+};
+
+
+function deselectIt() {
+	for (var i = 0; i < card.length; i++) {
+		card[i].classList.remove("border")
+	}
+};
 
 
 
